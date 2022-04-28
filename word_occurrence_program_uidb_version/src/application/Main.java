@@ -25,22 +25,23 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-//C:\Users\ccolo\Desktop\Raven.txt
+//  C:\Users\ccolo\Desktop\Raven.txt
 
-//import com.mysql.cj.xdevapi.*;
-
+@SuppressWarnings("unused")
 public class Main extends Application {
 	
-//	public static void post() throws Exception {	
-//		final ArrayList<Map.Entry<String, Integer>> countList = 
+
+	
+//	public static void post(ArrayList<Map.Entry<String, Integer>> countList) throws Exception {	
 //	try {
+//		System.out.println("test:" + countList);
 //		Connection conn = getConnection();
 //		Statement statement = conn.createStatement();
 //		PreparedStatement posted = conn.prepareStatement("INSERT INTO words (word) VALUES (statement)");
 //		posted.executeUpdate();
 //	}catch(Exception e) {System.out.println(e);}
 //		finally{System.out.println("Insert completed");}
-//}
+//}//Inserts the list of words and occurrences into the the table located in connected database
 	
 	public static void createTable() throws Exception{
 		try {
@@ -49,22 +50,21 @@ public class Main extends Application {
 		create.executeUpdate();
 		}catch(Exception e) {System.out.println(e);}
 			finally{System.out.println("Function complete");}
-	}
+	}//Creates a table inside the connected local SQL database
 	
 	public static Connection getConnection() throws Exception{
 		try {
 			String url = "jdbc:mysql://localhost:3306/word_occurances";
 			String username = "root";
-			String password = "Asdf0987!";
-			
+			String password = "Asdf0987!";			
 			Connection conn = DriverManager.getConnection(url,username,password);
 			System.out.println("Connected");
 			return conn;
-		} catch(Exception e) {System.out.println(e);
-		
-	}
+		} catch(Exception e) {System.out.println(e);		
+	}//Creates a connection to local SQL database
 		return null;		
 	}
+
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -118,10 +118,21 @@ public class Main extends Application {
 	        
 	        Set<Map.Entry<String, Integer>> countSet = count.entrySet();//Converting the hash map with the words and occurrences into a set
 	   
-	        ArrayList<Map.Entry<String, Integer>> countList = new ArrayList<Entry<String, Integer>>(countSet);//Converting previous set of words and occurrences into an array list
+	        final ArrayList<Map.Entry<String, Integer>> countList = new ArrayList<Entry<String, Integer>>(countSet);//Converting previous set of words and occurrences into an array list
+	        
+//	        	public static void post(ArrayList<Map.Entry<String, Integer>> countList) throws Exception {	
+	        	try {
+	        		System.out.println("test:" + count);
+	        		Connection conn = getConnection();
+//	        		Statement statement = conn.createStatement();
+	        		PreparedStatement posted = conn.prepareStatement("INSERT INTO words (word, occ) VALUES ('"+"tom"+"','"+"1"+"')");
+	        		posted.executeUpdate();
+	        	}catch(Exception e1) {System.out.println(e1);}
+	        		finally{System.out.println("Insert completed");}
+	        //Inserts the list of words and occurrences into the the table located in connected database
 	        
 	        Collections.sort(countList, new Comparator<Map.Entry<String, Integer>>(){//Sorting the array list using the comparator method
-
+	        	
 				@Override
 			public int compare(Entry<String, Integer> o1, Entry<String, Integer> o2) {//Creating the function/argument to sort the array list
 				return -o1.getValue().compareTo(o2.getValue());//Returning the sorted array list based on comparing occurrences in decreasing order
@@ -138,10 +149,12 @@ public class Main extends Application {
 		}});
 	}
 
+
 	public static void main(String[] args) throws Exception {
-//		post();
 		createTable();
 		launch(args);
+		
+//		post();
 		
 	}
 }
