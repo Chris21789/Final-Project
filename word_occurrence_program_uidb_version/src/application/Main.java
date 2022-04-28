@@ -3,6 +3,9 @@ package application;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -23,6 +26,31 @@ import javafx.scene.layout.BorderPane;
 //C:\Users\ccolo\Desktop\Raven.txt
 
 public class Main extends Application {
+	
+	public static void createTable() throws Exception{
+		try {
+		Connection conn = getConnection();
+		PreparedStatement create = conn.prepareStatement("CREATE TABLE IF NOT EXISTS words(id int NOT NULL AUTO_INCREMENT, word varchar(255), occ int, PRIMARY KEY(id))");
+		create.executeUpdate();
+		}catch(Exception e) {System.out.println(e);}
+			finally{System.out.println("Function complete");}
+	}
+	
+	public static Connection getConnection() throws Exception{
+		try {
+			String url = "jdbc:mysql://localhost:3306/word_occurances";
+			String username = "root";
+			String password = "Asdf0987!";
+			
+			Connection conn = DriverManager.getConnection(url,username,password);
+			System.out.println("Connected");
+			return conn;
+		} catch(Exception e) {System.out.println(e);
+		
+	}
+		return null;		
+	}
+	
 	@Override
 	public void start(Stage primaryStage) {
 		BorderPane paneForTextField = new BorderPane();
@@ -94,13 +122,9 @@ public class Main extends Application {
 			e1.printStackTrace();
 		}});
 	}
-	
-//	private Object String(String trim) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
+		createTable();
 		launch(args);
 	}
 }
