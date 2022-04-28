@@ -1,17 +1,15 @@
 package application;
-	
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
@@ -25,23 +23,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-//  C:\Users\ccolo\Desktop\Raven.txt
 
-@SuppressWarnings("unused")
 public class Main extends Application {
-	
-
-	
-//	public static void post(ArrayList<Map.Entry<String, Integer>> countList) throws Exception {	
-//	try {
-//		System.out.println("test:" + countList);
-//		Connection conn = getConnection();
-//		Statement statement = conn.createStatement();
-//		PreparedStatement posted = conn.prepareStatement("INSERT INTO words (word) VALUES (statement)");
-//		posted.executeUpdate();
-//	}catch(Exception e) {System.out.println(e);}
-//		finally{System.out.println("Insert completed");}
-//}//Inserts the list of words and occurrences into the the table located in connected database
 	
 	public static void createTable() throws Exception{
 		try {
@@ -65,7 +48,6 @@ public class Main extends Application {
 		return null;		
 	}
 
-	
 	@Override
 	public void start(Stage primaryStage) {
 		BorderPane paneForTextField = new BorderPane();
@@ -154,12 +136,8 @@ public class Main extends Application {
 		}});
 	}
 
-
 	public static void main(String[] args) throws Exception {
 		createTable();
 		launch(args);
-		
-//		post();
-		
 	}
 }
