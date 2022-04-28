@@ -6,10 +6,12 @@ import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
@@ -25,7 +27,20 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 //C:\Users\ccolo\Desktop\Raven.txt
 
+//import com.mysql.cj.xdevapi.*;
+
 public class Main extends Application {
+	
+	public static void post() throws Exception {	
+		final ArrayList<Map.Entry<String, Integer>> countList = 
+	try {
+		Connection conn = getConnection();
+		Statement statement = conn.createStatement();
+		PreparedStatement posted = conn.prepareStatement("INSERT INTO words (word) VALUES (statement)");
+		posted.executeUpdate();
+	}catch(Exception e) {System.out.println(e);}
+		finally{System.out.println("Insert completed");}
+}
 	
 	public static void createTable() throws Exception{
 		try {
@@ -124,7 +139,9 @@ public class Main extends Application {
 	}
 
 	public static void main(String[] args) throws Exception {
+//		post();
 		createTable();
 		launch(args);
+		
 	}
 }
