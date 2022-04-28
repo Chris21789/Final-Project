@@ -31,16 +31,16 @@ import javafx.scene.layout.BorderPane;
 
 public class Main extends Application {
 	
-	public static void post() throws Exception {	
-		final ArrayList<Map.Entry<String, Integer>> countList = 
-	try {
-		Connection conn = getConnection();
-		Statement statement = conn.createStatement();
-		PreparedStatement posted = conn.prepareStatement("INSERT INTO words (word) VALUES (statement)");
-		posted.executeUpdate();
-	}catch(Exception e) {System.out.println(e);}
-		finally{System.out.println("Insert completed");}
-}
+//	public static void post() throws Exception {	
+//		final ArrayList<Map.Entry<String, Integer>> countList = 
+//	try {
+//		Connection conn = getConnection();
+//		Statement statement = conn.createStatement();
+//		PreparedStatement posted = conn.prepareStatement("INSERT INTO words (word) VALUES (statement)");
+//		posted.executeUpdate();
+//	}catch(Exception e) {System.out.println(e);}
+//		finally{System.out.println("Insert completed");}
+//}
 	
 	public static void createTable() throws Exception{
 		try {
